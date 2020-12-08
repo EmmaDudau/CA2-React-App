@@ -40,7 +40,7 @@ public class Products {
 		this.productModified = productModified;
 		this.productCreated = this.productCreated;
 		this.productPrice = this.productPrice;
-		this.barcode = this.barcode;
+		this.productBarcode = this.productBarcode;
 	}
 	public long getId() {
 		return id;
@@ -87,11 +87,11 @@ public class Products {
 		this.productPrice = productPrice;
 	}
 
-	public String getBarcode() {
+	public String getProductBarcode() {
 		return barcode;
 	}
 
-	public void setBarcode(String barcode) {
+	public void setProductBarcode(String barcode) {
 		this.barcode = barcode;
 	}
 
