@@ -86,4 +86,4 @@ class ListProductsComponent extends Component {
     }
 }
 
-export default <ListProducts></ListProducts>Component
+export default ListProductsComponent
