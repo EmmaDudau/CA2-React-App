@@ -22,19 +22,31 @@ class ViewEmployeeComponent extends Component {
             <div>
                 <br></br>
                 <div className = "card col-md-6 offset-md-3">
-                    <h3 className = "text-center"> View Employee Details</h3>
+                    <h3 className = "text-center"> View customer Details</h3>
                     <div className = "card-body">
                         <div className = "row">
-                            <label> Employee First Name: </label>
+                            <label> First Name: </label>
                             <div> { this.state.employee.firstName }</div>
                         </div>
                         <div className = "row">
-                            <label> Employee Last Name: </label>
-                            <div> { this.state.employee.lastName }</div>
+                            <label> Last Name: </label>
+                            <div> { this.state.employee.surName }</div>
                         </div>
                         <div className = "row">
-                            <label> Employee Email ID: </label>
-                            <div> { this.state.employee.emailId }</div>
+                            <label> Address: </label>
+                            <div> { this.state.employee.address }</div>
+                        </div>
+                        <div className = "row">
+                            <label> Email: </label>
+                            <div> { this.state.employee.email }</div>
+                        </div>
+                        <div className = "row">
+                            <label> Phone Number: </label>
+                            <div> { this.state.employee.phone }</div>
+                        </div>
+                        <div className = "row">
+                            <label> Created date: </label>
+                            <div> { this.state.employee.createDate }</div>
                         </div>
                     </div>
 
