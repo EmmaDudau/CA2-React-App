@@ -144,9 +144,12 @@ class CreateEmployeeComponent extends Component {
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label> Created Date: </label>
-                                            <input placeholder="Created Date" name="createDate" className="form-control"
-                                                   value={this.state.createDate}
-                                                   onChange={this.changeCreateDateHandler}/>
+                                            {/*<input placeholder="Created Date" name="createDate" className="form-control"*/}
+                                                   {/*value={this.state.createDate}*/}
+                                                   {/*onChange={this.changeCreateDateHandler}/>*/}
+                                            <input placeholder="Created Date" type="date" name="createDate" max="3000-12-31"
+                                                   min="1000-01-01" value={this.state.createDate}
+                                                   onChange={this.changeCreateDateHandler} className="form-control"/>
                                         </div>
                                     </div>
 
