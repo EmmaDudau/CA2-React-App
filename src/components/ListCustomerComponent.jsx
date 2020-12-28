@@ -1,40 +1,40 @@
 import React, {Component} from 'react'
-import EmployeeService from '../services/EmployeeService'
+import CustomerService from '../services/CustomerService'
 
-class ListEmployeeComponent extends Component {
+class ListCustomerComponent extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            employees: []
+            customers: []
         }
-        this.addEmployee = this.addEmployee.bind(this);
-        this.editEmployee = this.editEmployee.bind(this);
-        this.deleteEmployee = this.deleteEmployee.bind(this);
+        this.addCustomer = this.addCustomer.bind(this);
+        this.editCustomer = this.editCustomer.bind(this);
+        this.deleteCustomer = this.deleteCustomer.bind(this);
     }
 
-    deleteEmployee(id) {
-        EmployeeService.deleteEmployee(id).then(res => {
-            this.setState({employees: this.state.employees.filter(employee => employee.id !== id)});
+    deleteCustomer(id) {
+        CustomerService.deleteCustomer(id).then(res => {
+            this.setState({customers: this.state.customers.filter(customer => customer.id !== id)});
         });
     }
 
-    viewEmployee(id) {
-        this.props.history.push(`/view-employee/${id}`);
+    viewCustomer(id) {
+        this.props.history.push(`/view-customer/${id}`);
     }
 
-    editEmployee(id) {
-        this.props.history.push(`/add-employee/${id}`);
+    editCustomer(id) {
+        this.props.history.push(`/add-customer/${id}`);
     }
 
     componentDidMount() {
-        EmployeeService.getEmployees().then((res) => {
-            this.setState({employees: res.data});
+        CustomerService.getCustomers().then((res) => {
+            this.setState({customers: res.data});
         });
     }
 
-    addEmployee() {
-        this.props.history.push('/add-employee/_add');
+    addCustomer() {
+        this.props.history.push('/add-customer/_add');
     }
 
     render() {
@@ -42,7 +42,7 @@ class ListEmployeeComponent extends Component {
             <div>
                 <h2 className="text-center">Customer List</h2>
                 <div className="row">
-                    <button className="btn btn-primary" onClick={this.addEmployee}> Add Customer</button>
+                    <button className="btn btn-primary" onClick={this.addCustomer}> Add Customer</button>
                 </div>
                 <br></br>
                 <div className="row">
@@ -61,25 +61,25 @@ class ListEmployeeComponent extends Component {
                         </thead>
                         <tbody>
                         {
-                            this.state.employees.map(
-                                employee =>
-                                    <tr key={employee.id}>
-                                        <td> {employee.firstName} </td>
-                                        <td> {employee.surName}</td>
-                                        <td> {employee.address}</td>
-                                        <td> {employee.email}</td>
-                                        <td> {employee.phone}</td>
-                                        <td> {employee.createDate}</td>
+                            this.state.customers.map(
+                                customer =>
+                                    <tr key={customer.id}>
+                                        <td> {customer.firstName} </td>
+                                        <td> {customer.surName}</td>
+                                        <td> {customer.address}</td>
+                                        <td> {customer.email}</td>
+                                        <td> {customer.phone}</td>
+                                        <td> {customer.createDate}</td>
                                         <td>
-                                            <button onClick={() => this.editEmployee(employee.id)}
+                                            <button onClick={() => this.editCustomer(customer.id)}
                                                     className="btn btn-info">Update
                                             </button>
                                             <button style={{marginLeft: "10px"}}
-                                                    onClick={() => this.deleteEmployee(employee.id)}
+                                                    onClick={() => this.deleteCustomer(customer.id)}
                                                     className="btn btn-danger">Delete
                                             </button>
                                             <button style={{marginLeft: "10px"}}
-                                                    onClick={() => this.viewEmployee(employee.id)}
+                                                    onClick={() => this.viewCustomer(customer.id)}
                                                     className="btn btn-info">View
                                             </button>
                                         </td>
@@ -96,4 +96,4 @@ class ListEmployeeComponent extends Component {
     }
 }
 
-export default ListEmployeeComponent
+export default ListCustomerComponent

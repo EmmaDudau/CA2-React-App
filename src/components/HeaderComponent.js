@@ -20,8 +20,8 @@ class HeaderComponent extends Component {
                 <nav className="navbar navbar-expand-md navbar-dark bg-dark">
                     <div><a href="https://www.ncirl.ie/" className="navbar-brand">Customer Order Management App</a></div>
                     <ul className="navbar-nav">
-                        <li><Link className="nav-link" to="/courses">Customers</Link></li>
-                        <li><Link className="nav-link" to="/products">Products</Link></li>
+                        {isUserLoggedIn &&    <li><Link className="nav-link" to="/customers">Customers</Link></li>}
+                        {isUserLoggedIn && <li><Link className="nav-link" to="/products">Products</Link></li>}
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                         {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
