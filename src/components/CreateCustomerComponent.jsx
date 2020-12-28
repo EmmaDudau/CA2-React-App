@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import EmployeeService from '../services/EmployeeService';
+import CustomerService from '../services/CustomerService';
 
-class CreateEmployeeComponent extends Component {
+class CreateCustomerComponent extends Component {
     constructor(props) {
         super(props)
 
@@ -13,52 +13,64 @@ class CreateEmployeeComponent extends Component {
             email: '',
             address: '',
             phone: '',
-            createDate: ''
+            createDate: '',
+            input: {},
+            errors: {}
 
         }
         this.changeFirstNameHandler = this.changeFirstNameHandler.bind(this);
         this.changeSurNameHandler = this.changeSurNameHandler.bind(this);
-        this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
+        this.saveOrUpdateCustomer = this.saveOrUpdateCustomer.bind(this);
     }
 
     // step 3
     componentDidMount() {
-
         // step 4
         if (this.state.id === '_add') {
             return
         } else {
-            EmployeeService.getEmployeeById(this.state.id).then((res) => {
-                let employee = res.data;
+            CustomerService.getCustomerById(this.state.id).then((res) => {
+                let customer = res.data;
                 this.setState({
-                    firstName: employee.firstName,
-                    surName: employee.surName,
-                    address: employee.address,
-                    email: employee.email,
-                    phone: employee.phone,
-                    createDate: employee.createDate
+                    firstName: customer.firstName,
+                    surName: customer.surName,
+                    address: customer.address,
+                    email: customer.email,
+                    phone: customer.phone,
+                    createDate: customer.createDate
                 });
             });
         }
     }
 
-    saveOrUpdateEmployee = (e) => {
+    saveOrUpdateCustomer = (e) => {
         e.preventDefault();
-        let employee = {
-            firstName: this.state.firstName, surName: this.state.surName, address: this.state.address,
-            email: this.state.email, phone: this.state.phone, createDate: this.state.createDate
-        };
-        console.log('employee => ' + JSON.stringify(employee));
 
-        // step 5
-        if (this.state.id === '_add') {
-            EmployeeService.createEmployee(employee).then(res => {
-                this.props.history.push('/employees');
-            });
-        } else {
-            EmployeeService.updateEmployee(employee, this.state.id).then(res => {
-                this.props.history.push('/employees');
-            });
+        if(this.validate()) {
+            console.log(this.state);
+
+            let input = {};
+            input["firstName"] = "";
+            input["email"] = "";
+            input["comment"] = "";
+            this.setState({input: input});
+
+            let customer = {
+                firstName: this.state.firstName, surName: this.state.surName, address: this.state.address,
+                email: this.state.email, phone: this.state.phone, createDate: this.state.createDate
+            };
+            console.log('customer => ' + JSON.stringify(customer));
+
+            // step 5
+            if (this.state.id === '_add') {
+                CustomerService.createCustomer(customer).then(res => {
+                    this.props.history.push('/customers');
+                });
+            } else {
+                CustomerService.updateCustomer(customer, this.state.id).then(res => {
+                    this.props.history.push('/customers');
+                });
+            }
         }
     }
 
@@ -87,7 +99,7 @@ class CreateEmployeeComponent extends Component {
     }
 
     cancel() {
-        this.props.history.push('/employees');
+        this.props.history.push('/customers');
     }
 
     getTitle() {
@@ -97,6 +109,38 @@ class CreateEmployeeComponent extends Component {
             return <h3 className="text-center">Update Customer</h3>
         }
     }
+
+
+    validate(){
+        let errors = {};
+        let isValid = true;
+
+        if (!this.state.firstName) {
+            isValid = false;
+            errors["firstName"] = "Please enter your name.";
+        }
+
+        if (!this.state.email) {
+            isValid = false;
+            errors["email"] = "Please enter your email Address.";
+        }
+
+        if (typeof this.state.email !== "undefined") {
+            var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            if (!pattern.test(this.state.email)) {
+                isValid = false;
+                errors["email"] = "Please enter valid email address.";
+            }
+        }
+
+        this.setState({
+            errors: errors
+        });
+
+        return isValid;
+    }
+
+
 
     render() {
         return (
@@ -109,12 +153,13 @@ class CreateEmployeeComponent extends Component {
                                 this.getTitle()
                             }
 
-                                <form>
+                                <form onSubmit={this.handleSubmit}>
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label> First Name: </label>
                                             <input placeholder="First Name" name="firstName" className="form-control"
-                                                   value={this.state.firstName} onChange={this.changeFirstNameHandler}/>
+                                                   value={this.state.firstName}  onChange={this.changeFirstNameHandler}/>
+                                            <div className="text-danger">{this.state.errors.firstName}</div>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label> Last Name: </label>
@@ -133,27 +178,25 @@ class CreateEmployeeComponent extends Component {
                                             <label> Email: </label>
                                             <input placeholder="Email Address" name="email" className="form-control"
                                                    value={this.state.email} onChange={this.changeEmailHandler}/>
+                                            <div className="text-danger">{this.state.errors.email}</div>
                                         </div>
                                     </div>
 
                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                             <label> Phone Number: </label>
-                                            <input placeholder="Phone" name="phone" className="form-control"
+                                            <input type="number" placeholder="Phone" name="phone" className="form-control"
                                                    value={this.state.phone} onChange={this.changePhoneHandler}/>
                                         </div>
                                         <div class="form-group col-md-6">
                                             <label> Created Date: </label>
-                                            {/*<input placeholder="Created Date" name="createDate" className="form-control"*/}
-                                                   {/*value={this.state.createDate}*/}
-                                                   {/*onChange={this.changeCreateDateHandler}/>*/}
                                             <input placeholder="Created Date" type="date" name="createDate" max="3000-12-31"
                                                    min="1000-01-01" value={this.state.createDate}
                                                    onChange={this.changeCreateDateHandler} className="form-control"/>
                                         </div>
                                     </div>
 
-                                    <button class="btn btn-success btn float-left" onClick={this.saveOrUpdateEmployee}>Save</button>
+                                    <button class="btn btn-success btn float-left" onClick={this.saveOrUpdateCustomer}>Save</button>
                                     <button class="btn btn-danger btn float-right" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                 </form>
                             </div>
@@ -166,4 +209,4 @@ class CreateEmployeeComponent extends Component {
     }
 }
 
-export default CreateEmployeeComponent
+export default CreateCustomerComponent

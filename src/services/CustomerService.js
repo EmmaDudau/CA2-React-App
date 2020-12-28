@@ -1,39 +1,39 @@
 import axios from 'axios';
 
 
-const EMPLOYEE_API_BASE_URL = "http://localhost:8080/customers";
+const CUSTOMER_API_BASE_URL = "http://localhost:8080/customers";
 
-class EmployeeService {
+class CustomerService {
 
-    getEmployees(){
-        return axios.get(EMPLOYEE_API_BASE_URL,
+    getCustomers(){
+        return axios.get(CUSTOMER_API_BASE_URL,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
         );
     }
 
-    createEmployee(employee){
-        return axios.post(EMPLOYEE_API_BASE_URL, employee,
+    createCustomer(customer){
+        return axios.post(CUSTOMER_API_BASE_URL, customer,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
 
-    getEmployeeById(employeeId){
-        return axios.get(EMPLOYEE_API_BASE_URL + '/' + employeeId,
+    getCustomerById(customerId){
+        return axios.get(CUSTOMER_API_BASE_URL + '/' + customerId,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
 
-    updateEmployee(employee, employeeId){
-        return axios.put(EMPLOYEE_API_BASE_URL + '/' + employeeId, employee,
+    updateCustomer(customer, customerId){
+        return axios.put(CUSTOMER_API_BASE_URL + '/' + customerId, customer,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
 
-    deleteEmployee(employeeId){
-        return axios.delete(EMPLOYEE_API_BASE_URL + '/' + employeeId,
+    deleteCustomer(customerId){
+        return axios.delete(CUSTOMER_API_BASE_URL + '/' + customerId,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
 }
 
-export default new EmployeeService()
+export default new CustomerService()
