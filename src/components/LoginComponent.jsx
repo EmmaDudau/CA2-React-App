@@ -41,17 +41,17 @@ class LoginComponent extends Component {
 
     render() {
         return (
-            <div class="login-form">
-                <h2>Login</h2>
+            <div className="card col-md-6 login-form">
+                <h2 className="text-center">Login</h2>
                         {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
                         {this.state.showSuccessMessage && <div>Login Sucessful</div>}
                 <div className="form-group">
-                        <input class="form-control" type="text" placeholder="Username"  name="username" value={this.state.username} onChange={this.handleChange} />
+                        <input className="form-control" type="text" placeholder="Username"  name="username" value={this.state.username} onChange={this.handleChange} />
                 </div>
                 <div className="form-group">
-                        <input class="form-control" type="password"  placeholder="Password"  name="password" value={this.state.password} onChange={this.handleChange} />
+                        <input className="form-control" type="password"  placeholder="Password"  name="password" value={this.state.password} onChange={this.handleChange} />
                 </div>
-                        <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
+                        <button className="btn btn-success mb-3" onClick={this.loginClicked}>Login</button>
             </div>
 
         )

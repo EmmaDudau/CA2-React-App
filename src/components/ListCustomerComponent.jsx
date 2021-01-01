@@ -40,7 +40,7 @@ class ListCustomerComponent extends Component {
     render() {
         return (
             <div>
-                <h2 className="text-center">Customer List</h2>
+                <h2 className="text-center mt-3">Customer List</h2>
                 <div className="row">
                     <button className="btn btn-primary" onClick={this.addCustomer}> Add Customer</button>
                 </div>
@@ -80,7 +80,7 @@ class ListCustomerComponent extends Component {
                                             </button>
                                             <button style={{marginLeft: "10px"}}
                                                     onClick={() => this.viewCustomer(customer.id)}
-                                                    className="btn btn-info">View
+                                                    className="btn btn-success">View
                                             </button>
                                         </td>
                                     </tr>
