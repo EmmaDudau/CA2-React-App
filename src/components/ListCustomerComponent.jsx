@@ -80,7 +80,7 @@ class ListCustomerComponent extends Component {
                                             </button>
                                             <button style={{marginLeft: "10px"}}
                                                     onClick={() => this.viewCustomer(customer.id)}
-                                                    className="btn btn-info">View
+                                                    className="btn btn-success">View
                                             </button>
                                         </td>
                                     </tr>
