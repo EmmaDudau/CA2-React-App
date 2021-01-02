@@ -1,36 +1,36 @@
 import axios from 'axios';
 
 
-const PRODUCT_API_BASE_URL = "http://localhost:8080/products";
+const ORDER_API_BASE_URL = "http://localhost:8080/orders";
 
-class ProductService {
+class OrderService {
 
-    getProducts(){
-        return axios.get(PRODUCT_API_BASE_URL,
+    getOrders(){
+        return axios.get(ORDER_API_BASE_URL,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
         );
     }
 
-    createProduct(product){
-        return axios.post(PRODUCT_API_BASE_URL, product,
+    createOrder(order){
+        return axios.post(ORDER_API_BASE_URL, order,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
 
-    getProductById(productId){
-        return axios.get(PRODUCT_API_BASE_URL + '/' + productId,
+    getOrderById(orderId){
+        return axios.get(ORDER_API_BASE_URL + '/' + orderId,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
 
-    updateProduct(product, productId){
-        return axios.put(PRODUCT_API_BASE_URL + '/' + productId, product,
+    updateOrder(order, orderId){
+        return axios.put(ORDER_API_BASE_URL + '/' + orderId, order,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
 
-    deleteProduct(productId){
-        return axios.delete(PRODUCT_API_BASE_URL + '/' + productId,
+    deleteOrder(orderId){
+        return axios.delete(ORDER_API_BASE_URL + '/' + orderId,
             // { headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
             );
     }
@@ -38,4 +38,4 @@ class ProductService {
 
 }
 
-export default new ProductService()
+export default new OrderService()

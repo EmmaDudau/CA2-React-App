@@ -13,6 +13,7 @@ import AuthenticatedRoute from './components/AuthenticatedRoute';
 import ListProductComponent from './components/ListProductComponent';
 import CreateProductComponent from './components/CreateProductComponent';
 import ViewProductComponent from './components/ViewProductComponent';
+import ListOrderComponent from './components/ListOrderComponent';
 
 function App() {
   return (
@@ -32,6 +33,9 @@ function App() {
                           <AuthenticatedRoute path = "/products" component = {ListProductComponent}></AuthenticatedRoute>
                           <AuthenticatedRoute path = "/add-product/:id" component = {CreateProductComponent}></AuthenticatedRoute>
                           <AuthenticatedRoute path = "/view-product/:id" component = {ViewProductComponent}></AuthenticatedRoute>
+
+                          <AuthenticatedRoute path = "/orders" component = {ListOrderComponent}></AuthenticatedRoute>
+
 
                     </Switch>
                 </div>
